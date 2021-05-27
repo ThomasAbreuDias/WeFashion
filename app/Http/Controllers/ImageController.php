@@ -26,8 +26,10 @@ class ImageController extends Controller
             'cache_path_prefix' => '.cache',
             'base_url' => 'img',
         ]);
+        
         //check if the sigature is correct
         $signature->validateRequest($request->path(), $request->all() );
+
         return $server->getImageResponse($path, $request->all());
     }
 }

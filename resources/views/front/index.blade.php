@@ -13,7 +13,7 @@
     <div class="col s12 m6 l3">
         <div class="card">
             <div class="card-image">
-                <img src="{{ image($product->picture->link, 511, 639) }}">
+                <img src="{{ image($product->picture->link, 500, 600, 'crop-75-25') }}">
             </div>
             <div class="card-content">
                 <p>{{ Str::limit($product->description, 40) }}</p>

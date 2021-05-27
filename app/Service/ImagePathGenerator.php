@@ -18,7 +18,7 @@
         /**
          * Generate an resize image url 
          */
-        public function generate(string $path, int $width, int $height): string {
-            return $this->urlBuilder->getUrl($path, ['w'=> $width, 'h'=>$height]);
+        public function generate(string $path, int $width, int $height, string $fit): string {
+            return $this->urlBuilder->getUrl($path, ['w'=> $width, 'h'=>$height, 'fit' => $fit]);
         }
     }

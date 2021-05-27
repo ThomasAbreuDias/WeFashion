@@ -11,14 +11,14 @@ class Product extends Model
     protected $fillable = [
         'title',
         'description',
-        'genre_id',   
+        'category_id',   
         'status',   
     ];
-    public function setGenreIdAttribute($value){
+    public function setCategoryIdAttribute($value){
         if($value == 0){
-            $this->attributes['genre_id'] = null;
+            $this->attributes['category_id'] = null;
         }else {
-            $this->attributes['genre_id'] = $value;
+            $this->attributes['category_id'] = $value;
         }
     }
 

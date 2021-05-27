@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Storage; 
 
 class ProductTableSeeder extends Seeder
 {
@@ -23,18 +23,14 @@ class ProductTableSeeder extends Seeder
             $product->category()->associate($category);
             $product->save();
 
-            $link = Str::random(12) . '.jpg'; // hash de lien pour la sécurité (injection de scripts protection)
-
-            $sub_folder = $category->id === 1 ? 'hommes' : 'femmes';
-            $file = Storage::allFiles($sub_folder);
-
-            $randomFile = $file[rand(0, count($file) - 1)];
-
-
-
+            //images
+            $sub_folder_category = $category->id === 1 ? 'hommes' : 'femmes';
+            $files = Storage::allFiles($sub_folder_category);      
+            $file_name = '/'.$files[rand(0, count($files) - 1)];    
+            
             $product->picture()->create([
                 'title' => 'Default', // valeur par défaut
-                'link' => $randomFile
+                'link' => $file_name
             ]);
 
             //association des tailles

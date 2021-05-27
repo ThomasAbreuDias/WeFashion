@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FrontController;
+use App\Http\Controllers\ImageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+Route::get('/', [FrontController::class, 'index']);
+Route::get('product/{id}', [FrontController::class, 'show'])->where(['id' => '[0-9]+']);
+
+Route::get('img/{path}', [ImageController::class, 'show'])->where('path', '.*');

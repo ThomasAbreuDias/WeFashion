@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\Size;
 
 class FrontController extends Controller
 {
@@ -29,7 +30,12 @@ class FrontController extends Controller
     
     public function show(int $id) {
         $product = Product::find($id);
-        return  view('front.show', ['product' => $product]);
+        $sizes = Size::find($product->getSizesIdsAttribute())[0];
+
+        return  view('front.show', [
+            'product' => $product,
+            'sizes' => $sizes->toArray(),
+        ]);
     }
     public function showProductByCategory(int $id) {
         $fr_categories = [

@@ -26,7 +26,11 @@ class Product extends Model
         return $this->belongsTo(Category::class);
     }
     public function sizes(){
-        return $this->belongsToMany(Size::class);
+        return $this->belongsToMany(Size::class)->select(['size_id']);
+    }
+    public function getSizesIdsAttribute()
+    {
+        return $this->sizes->pluck('pivot.size_id');
     }
     public function picture(){
         return $this->hasOne(Picture::class);

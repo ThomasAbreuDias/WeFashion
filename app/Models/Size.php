@@ -10,6 +10,10 @@ class Size extends Model
     use HasFactory;
     public $timestamps = false;
     public function products(){
-        return $this->belongsToMany(Product::class);
+        return $this->belongsToMany(Product::class)->select(['product_id']);
+    }
+    public function getSizesArray() {
+        $sizes_array = collect(\DB::select('select * from sizes where id = :id', ['id' => $this->id])[0]);
+        return $sizes_array->makeVisible('attribute')->toArray();
     }
 }

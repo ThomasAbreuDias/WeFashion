@@ -1,6 +1,3 @@
-#how-many {
-    float: right;
-}
 /* After section */
 .euro::after {
     content: "€";
@@ -9,3 +6,9 @@
     content: "$";
 }
 /* End After section */
+main {
+    margin-top: 1em;
+}
+.nav-item {
+    text-transform: uppercase;
+}

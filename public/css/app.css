@@ -8182,9 +8182,6 @@ input[type=range]::-ms-thumb {
     margin-top: 1.2rem;
   }
 }
-#how-many {
-    float: right;
-}
 /* After section */
 .euro::after {
     content: "€";
@@ -8193,3 +8190,9 @@ input[type=range]::-ms-thumb {
     content: "$";
 }
 /* End After section */
+main {
+    margin-top: 1em;
+}
+.nav-item {
+    text-transform: uppercase;
+}

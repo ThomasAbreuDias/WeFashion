@@ -2,32 +2,40 @@
 
 @section('content')
 <div class="row">
-    <span id="how-many">{{count($products)}} produit sont disponible</span>
-</div>
-<div class="row">
-    @forelse($products as $product)
-    <span>
-        {{-- {{ dump(asset('images'.$product->picture->link)) }} --}}
-    </span>
+@if (empty($products))
+        <h1>C'est vide</h1>
+    <img src="https://i.giphy.com/media/3oriff4xQ7Oq2TIgTu/giphy.webp" alt="empty">
+@else
+    <div class="row">
+        <span class="right">{{ $products->total() }} résultats</span>
+    </div>
+    @foreach($products as $product)
     @if ($product->status !== 'unpublished')
-    <div class="col s12 m6 l3">
+    <div class="col s12 m8 l4">
         <div class="card">
             <div class="card-image">
                 <img src="{{ image($product->picture->link, 500, 600, 'crop-75-25') }}">
+                @if ($product->discounted && !isset($sales))
+                <span class="badge red">en solde</span>   
+                @endif
             </div>
             <div class="card-content">
                 <p>{{ Str::limit($product->description, 40) }}</p>
             </div>
             <div class="card-action valign-wrapper cyan darken-2">
                     <a  class=" text-darken-1" href="{{url('product', $product->id)}}">{{$product->name}}</a>
-                    <span class="right-align euro">{{$product->price}}</span>
+                    <div class="right-align">
+                        <span class="right-align euro">{{$product->price}}</span>
+                    </div>
             </div>
         </div>
     </div>
     @endif   
-@empty
-<h1>C'est vide</h1>
-<img src="https://i.giphy.com/media/3oriff4xQ7Oq2TIgTu/giphy.webp" alt="empty">
-@endforelse
+    @endforeach
+    <div class="row">
+        <span class=>{{ $products->links('partials.paginate') }}</span>
+    </div>
+@endif
 </div>
-    @endsection 
+@endsection 
+

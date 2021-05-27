@@ -15,7 +15,7 @@
         <div class="card">
             <div class="card-image">
                 <img src="{{ image($product->picture->link, 500, 600, 'crop-75-25') }}">
-                @if ($product->discounted && !isset($sales))
+                @if ($product->discounted && !Request::is('sales'))
                 <span class="badge red">en solde</span>   
                 @endif
             </div>

@@ -17,6 +17,7 @@ use App\Http\Controllers\ImageController;
 
 Route::get('/', [FrontController::class, 'index']);
 Route::get('/sales', [FrontController::class, 'sales']);
+Route::get('//category/{id}', [FrontController::class, 'showProductByCategory'])->where(['id' => '[0-9]+']);
 Route::get('product/{id}', [FrontController::class, 'show'])->where(['id' => '[0-9]+']);
 
 Route::get('img/{path}', [ImageController::class, 'show'])->where('path', '.*');

@@ -14,17 +14,20 @@
         <div class="col s3">
             <h1>{{ ucfirst($product->name) }}</h1>
             <form action="#" method="POST">
-                <label>Votres taille</label>
+                <label>Tailles disponibles</label>
                 <div class="input-field">
-                    <select>
+                    <select class="browser-default" @if( $sizes['id']!== 1 && !in_array(1, $sizes)) disabled @endif>
                     @foreach ($sizes as $size => $has)
-                        @if($loop->first && $has)
-                        <option value=""disabled selected>Votre taille</option>
-                        @else
-                        <option value="{{$size}}">{{$size}}</option>
+                        @if($loop->first)
+                        <option value=""disabled selected>Choissez une taille</option>
+                        @else    
+                            @if($has)
+                            <option value="{{$size}}">{{Str::upper($size)}}</option>
+                            @endif
                         @endif
                     @endforeach
                     </select>
+
                 </div>
                   <button type="submit">Acheter</button>
             </form>

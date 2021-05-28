@@ -31,7 +31,6 @@ class FrontController extends Controller
     public function show(int $id) {
         $product = Product::find($id);
         $sizes = Size::find($product->getSizesIdsAttribute())[0];
-
         return  view('front.show', [
             'product' => $product,
             'sizes' => $sizes->toArray(),

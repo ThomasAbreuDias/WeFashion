@@ -21,7 +21,7 @@ class CreateProductsTable extends Migration
             $table->decimal('price', 8, 2);
             $table->char('reference', 16);
             $table->enum('status', ['published', 'unpublished'])->default('unpublished');
-            $table->boolean('discounted');
+            $table->boolean('discounted')->default(false);
             $table->unsignedInteger('category_id')->nullable();
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');// unsignedInteger
         });

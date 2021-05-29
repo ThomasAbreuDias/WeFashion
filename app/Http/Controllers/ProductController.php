@@ -14,13 +14,14 @@ class ProductController extends Controller
     protected $paginate = 8;
     
     protected $validate_rules = [
-        "name" => "required|max:255",
+        "name" => "required|string|max:100",
         "description" => "required|string",
-        "price" => "required|between:0.00,99999999.99",//pour decimal(8,2)
+        "price" => "required|digits_between:0.00,99999999.99|",//pour decimal(8,2)
         "reference" => "required|alpha_num|max:16",
         "category_id" => "required|integer",
         "sizes.*" => "string",
         "status" => "in:published, unpublished",
+        "discounted" => "boolean|nullable",
         "title_img" => "string|nullable",
         "picture" => "image|max:3000",
     ];
@@ -58,10 +59,11 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate($this->validate_rules);
-        // dd($request->all());
         $product = Product::create($request->all());
-        $product->sizes()->attach($request->sizes);
-        $picture = $request-file('picture');
+        $form_sizes_val = Size::fromFormToDb($request->sizes);
+        $sizes = Size::create($form_sizes_val);
+        $product->sizes()->attach($sizes);
+        $picture = $request->file('picture');
 
         if(!empty($img)){
             $link = $request->file('picture')->store('images');
@@ -70,7 +72,7 @@ class ProductController extends Controller
                 'title' => $request->title_img ?? $request->title
             ]);
         }
-        return redirect()->route('book.index');
+        return redirect()->route('products.index');
     }
 
     /**
@@ -113,9 +115,12 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        dd($request->all()); 
         $product->update($request->all());
-        $product->authors()->sync($request->authors);
+        $sizes = Size::find($request->sizes_id);
+        $form_sizes_val = Size::fromFormToDb($request->sizes);
+        $sizes->update($form_sizes_val);
+
+
         $img = $request->file('picture');
         $title_img = $request->title_img; 
         
@@ -135,7 +140,7 @@ class ProductController extends Controller
             ]);
             
         }
-        return redirect()->route('back.product.index');
+        return redirect()->route('products.index');
     }
 
     /**

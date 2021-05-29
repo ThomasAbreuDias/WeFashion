@@ -15,11 +15,11 @@ class CreateSizesTable extends Migration
     {
         Schema::create('sizes', function (Blueprint $table) {
             $table->increments('id');
-            $table->boolean('xs');
-            $table->boolean('s');
-            $table->boolean('m');
-            $table->boolean('l');
-            $table->boolean('xl');
+            $table->boolean('xs')->default(false);
+            $table->boolean('s')->default(false);
+            $table->boolean('m')->default(false);
+            $table->boolean('l')->default(false);
+            $table->boolean('xl')->default(false);
         });
     }
 

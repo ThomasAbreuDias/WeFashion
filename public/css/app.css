@@ -14331,6 +14331,7 @@ i {
 .btn-add {
     width: 50%;
 }
+
 /* After section */
 .euro::after {
     content: "€";

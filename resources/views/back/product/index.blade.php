@@ -20,6 +20,7 @@
                 <tr>
                 <th scope="col">Nom</th>
                 <th scope="col">Tailles</th>
+                <th scope="col">Référence</th>
                 <th scope="col">Prix</th>
                 <th scope="col">Categorie</th>
                 <th scope="col">Status</th>
@@ -29,7 +30,7 @@
             </thead>
             <tbody>
                 @forelse($products as $product)
-                <tr>
+                <tr @if($product->discounted) class="red lighten-5" title="Article soldé"@endif>
                     <th scope="row">
                         <a href="{{route('products.edit',$product->id) }}">{{Str::upper($product->name)}}</a>
                     </th>
@@ -40,18 +41,17 @@
                             Non disponible
                         @endforelse
                     </td>
+                    <td><span>{{ $product->reference ?? "aucune ref"}}</span></td>
                     <td><span class="euro">{{ $product->price ?? "aucun genre"}}</span></td>
-                    <td>{{ App\Models\Category::frName($product->category->id) ?? "aucun genre"}}</td>
+                    <td>{{ ucfirst(App\Models\Category::frName($product->category->id)) ?? "aucun genre"}}</td>
                     <td>
                         @if($product->status == 'published')
-                            <a class="waves-effect waves-light btn green">
-                                <i class="material-icons left">check_circle_outline</i>
-                                <label class="white-text">Publié</label>
+                            <a class="waves-effect waves-light btn green" title="Publié">
+                                <i class="material-icons status">check_circle_outline</i>
                             </a>
                         @else
-                            <a class="waves-effect waves-light btn amber">
-                                <i class="material-icons left">unpublished</i>
-                                <label class="white-text">Non publié</label>
+                            <a class="waves-effect waves-light btn amber" title="Non publié">
+                                <i class="material-icons status">unpublished</i>
                             </a>
                         @endif
                     </td>

@@ -20,6 +20,21 @@
             </fieldset>
         </div>
         <div class="row">
+            <fieldset class="input-field col s12">
+                <legend class="control-label">Prix produit</legend>
+                <input type="text" name="price" value="{{$product->price}}">
+
+            </fieldset>
+        </div>
+        <div class="row">
+            <fieldset class="input-field col s12">
+                <legend class="control-label">Réfèrence produit</legend>
+                <input type="text" name="reference" value="{{$product->reference}}">
+                @if($errors->has('reference')) <span class="error">{{$errors->first('reference')}}</span>@endif
+
+            </fieldset>
+        </div>
+        <div class="row">
             <fieldset class="input-field col s5">
                 <legend class="control-label">Categories</legend>
                 <input type="hidden" name="category_id" value="{{$product->category->id}}">
@@ -34,6 +49,7 @@
             </fieldset>
             <div class="col s7">
                 <legend class="control-label">Tailles</legend>
+                <input type="hidden" name="sizes_id" value="{{$product->getSizesIdsAttribute()}}">
                 @forelse ($sizes as $size => $has)
                 @if($size !== 'id')
                 <fieldset class="input-field col s2">
@@ -63,6 +79,13 @@
                     <span>Non publié</span>
                 </label>
         </div>
+        <div class="row">
+            <legend class="control-label">Réduction</legend>
+            <label for="discounted">
+                <input type="checkbox" class="filled-in"  @if($product->discounted) checked @endif  value="1" name="discounted" id="discounted">
+                <span>Soldé</span>
+            </label>
+    </div>
         <div class="row">
             <legend class="control-label">Image produit</legend>
             <input class="file" type="file" name="picture" >

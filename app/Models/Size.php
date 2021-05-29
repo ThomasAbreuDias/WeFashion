@@ -11,6 +11,13 @@ class Size extends Model
 {
     use HasFactory;
     public $timestamps = false;
+    protected $fillable = [
+        'xs',
+        's',
+        'm',
+        'l',
+        'xl',
+    ];
     public function products(){
         return $this->belongsToMany(Product::class)->select(['product_id']);
     }
@@ -51,5 +58,20 @@ class Size extends Model
             array_shift($size_names);
 
         return $size_names;
+    }
+
+    /**
+     * Static method to create an array which fit with the db structure
+     *
+     * @return Array
+     */
+    static public function fromFormToDb($sizes) {
+        $db_sizes = [];
+        $dbt = Size::getTableColumns();
+        foreach ($dbt as $size) {
+            $db_sizes[$size] = in_array($size, $sizes);
+        }
+
+        return $db_sizes;
     }
 }

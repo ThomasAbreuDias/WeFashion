@@ -9,10 +9,13 @@ class Product extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'title',
-        'description',
-        'category_id',   
-        'status',   
+        "name",
+        "description",
+        "price",
+        "reference",
+        "category_id",
+        "status",
+        'discounted',
     ];
     public function setCategoryIdAttribute($value){
         if($value == 0){
@@ -30,10 +33,11 @@ class Product extends Model
     }
     public function getSizesIdsAttribute()
     {
-        return $this->sizes->pluck('pivot.size_id');
+        $id = $this->sizes->pluck('pivot.size_id')[0];
+        return $id;
     }
     public function getSizesArray() {
-        $sizes = collect(Size::find($this->getSizesIdsAttribute()))->toArray()[0];
+        $sizes = collect(Size::find($this->getSizesIdsAttribute()))->toArray();
         return $sizes;
     }
     public function picture(){

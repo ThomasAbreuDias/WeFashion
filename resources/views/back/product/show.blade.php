@@ -2,7 +2,6 @@
 
 @section('content')
 <article class="container">
-    @dump($product)
     @if(!empty($product))
     <div class="row">
         <div class="col s9">
@@ -13,24 +12,56 @@
             @endif   
         </div>
         <div class="col s3">
-            <h1>{{ ucfirst($product->name) }}</h1>
-            <span class="right-align euro">{{$product->price}}</span>
-            <form action="#" method="POST">
-                <label>Tailles disponibles</label>
-                <div class="input-field">
-                    <select class="browser-default" @if( $sizes['id']!== 1 && !in_array(1, $sizes)) disabled @endif>
-                    @foreach ($sizes as $size => $has)
-                        @if($loop->first)
-                        <option value="" disabled selected>Choissez une taille</option>
-                        @else    
-                            @if($has)
-                            <option value="{{$size}}">{{Str::upper($size)}}</option>
-                            @endif
+            <table>
+                <tbody>
+                    <tr>
+                        <td>Nom :</td>
+                        <td class="right-align">{{ ucfirst($product->name) }}</td>
+                    </tr>
+                    <tr>
+                        <td>Prix :</td>
+                        <td class="right-align euro">{{$product->price}}</td>
+                    </tr>
+                    <tr>
+                        <td>Crée :</td>
+                        <td class="right-align">{{$product->created_at}}</td>
+                    </tr>
+                    <tr>
+                        <td>Modifié :</td>
+                        <td class="right-align">{{$product->updated_at}}</td>
+                    </tr>
+                    <tr>
+                        <td>Réf. :</td>
+                        <td class="right-align">{{$product->reference}}</td>
+                    </tr>
+                    <tr>
+                        <td>Publié :</td>
+                        <td class="right-align">{{$product->status ? 'Oui' : 'Non' }}</td>
+                    </tr>
+                    <tr>
+                        <td>Soldé :</td>
+                        <td class="right-align">{{$product->discounted ? 'Oui' : 'Non' }}</td>
+                    </tr>
+                    <tr>
+                        <td>Pour :</td>
+                        <td class="right-align">{{ucfirst(App\Models\Category::frName($product->category_id))}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="input-field">
+                <select class="browser-default" @if( $sizes['id']!== 1 && !in_array(1, $sizes)) disabled @endif>
+                @foreach ($sizes as $size => $has)
+                    @if($loop->first)
+                    <option value="" disabled selected>Tailles disponible</option>
+                    @else    
+                        @if($has)
+                        <option value="{{$size}}">{{Str::upper($size)}}</option>
                         @endif
-                    @endforeach
-                    </select>
-                </div>
-            </form>
+                    @endif
+                @endforeach
+                </select>
+            </div>
         </div>
     @else 
         <h1>Désolé article non disponible</h1>

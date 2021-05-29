@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\UploadedFile;
 
 class Product extends Model
 {
@@ -50,5 +51,16 @@ class Product extends Model
     
     public function scopeDiscounted($query){
         return $query->where('discounted', 1);
+    }
+    /**
+     * method to import picture
+     */
+    public function addPicture(UploadedFile $file, int $category_id, string $title){
+        $sub_folder_category = $category_id === 1 ? '/hommes' : '/femmes';
+        $link = $file->store('images'.$sub_folder_category);
+        $this->picture()->create([
+            'link' => $link,
+            'title' => $title 
+        ]);
     }
 }

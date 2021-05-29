@@ -8,6 +8,11 @@
                 <i class="material-icons left">add</i>
                 Ajouter un nouveau produit !
             </a>
+            @if(session()->get('message'))
+                <div class="alert alert-success">
+                {{ session()->get('message') }}
+                </div>
+            @endif
         </div>
     </header>
     @if (empty($products))

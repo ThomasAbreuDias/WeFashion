@@ -14315,6 +14315,10 @@ body {
     min-height: 100vh;
     flex-direction: column;
 }
+.we-fashion-green {
+    color: #66EB9A !important;
+}
+
 main {
     margin-top: 1em;
     flex: 1 0 auto;

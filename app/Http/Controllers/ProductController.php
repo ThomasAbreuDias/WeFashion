@@ -7,6 +7,7 @@ use App\Models\Size;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
+
 class ProductController extends Controller
 {
 
@@ -64,15 +65,10 @@ class ProductController extends Controller
         $sizes = Size::create($form_sizes_val);
         $product->sizes()->attach($sizes);
         $picture = $request->file('picture');
-
-        if(!empty($img)){
-            $link = $request->file('picture')->store('images');
-            $product->picture()->create([
-                'link' => $link,
-                'title' => $request->title_img ?? $request->title
-            ]);
+        if(!empty($picture)){
+            $product->addPicture($request->file('picture'), $product->category->id, $request->title_img);
         }
-        return redirect()->route('products.index');
+        return redirect()->route('products.index')->with('message', 'Votre Produit à été ajouter !');
     }
 
     /**
@@ -119,28 +115,18 @@ class ProductController extends Controller
         $sizes = Size::find($request->sizes_id);
         $form_sizes_val = Size::fromFormToDb($request->sizes);
         $sizes->update($form_sizes_val);
+        $picture = $request->file('picture');
 
-
-        $img = $request->file('picture');
         $title_img = $request->title_img; 
-        
-        // partis buger  
-        if (!empty($img)) {
-            $link = $request->file('picture')->store('images');
-            // suppression de l'image si elle existe 
-            if($product->picture->size > 0){
-                Storage::disk('local')->delete($product->picture->link); // supprimer physiquement l'image
+        if(!empty($picture)){
+            if($picture->getSize() > 0){
+                \Storage::disk('local')->delete($product->picture->link); // supprimer physiquement l'image
                 $product->picture()->delete(); // supprimer l'information en base de données
             }
-
-            // mettre à jour la table picture pour le lien vers l'image dans la base de données
-            $product->picture()->create([
-                'link' => $link,
-                'title' => $title_img?? $request->title
-            ]);
-            
+            $product->addPicture($request->file('picture'), $product->category->id, $request->title_img);
         }
-        return redirect()->route('products.index');
+
+        return redirect()->route('products.index')->with('message', 'Modification apporté');
     }
 
     /**

@@ -1,11 +1,11 @@
 <nav>
     <div class="nav-wrapper container">
-      <a href="{{url('/')}}" class="waves-effect waves-teal btn-flat">{{config('app.name')}}</a>
+      <a href="{{url('/')}}" class="waves-effect waves-teal btn-flat we-fashion-green">{{config('app.name')}}</a>
       <ul id="nav-mobile" class="right">
+        @if (isset($categories))
         <li @if(Request::is('sales')) class="active" @endif>
             <a class="nav-item" href="{{url('sales')}}">soldes</a>
         </li>
-        @if (isset($categories))
         @forelse($categories as $id => $name)
             <li @if(Request::url() == url('category', $id)) class="active" @endif>
               <a class="nav-item" href="{{url('category', $id)}}">{{App\Models\Category::frName($id)}}</a>

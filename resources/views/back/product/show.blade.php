@@ -2,6 +2,7 @@
 
 @section('content')
 <article class="container">
+    @dump($product)
     @if(!empty($product))
     <div class="row">
         <div class="col s9">
@@ -20,7 +21,7 @@
                     <select class="browser-default" @if( $sizes['id']!== 1 && !in_array(1, $sizes)) disabled @endif>
                     @foreach ($sizes as $size => $has)
                         @if($loop->first)
-                        <option value=""disabled selected>Choissez une taille</option>
+                        <option value="" disabled selected>Choissez une taille</option>
                         @else    
                             @if($has)
                             <option value="{{$size}}">{{Str::upper($size)}}</option>
@@ -29,7 +30,6 @@
                     @endforeach
                     </select>
                 </div>
-                  <button type="submit">Acheter</button>
             </form>
         </div>
     @else 

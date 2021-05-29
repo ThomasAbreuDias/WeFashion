@@ -7,18 +7,25 @@
         </li>
         @if (isset($categories))
         @forelse($categories as $id => $name)
-            @if ($id === 1)
             <li @if(Request::url() == url('category', $id)) class="active" @endif>
-              <a class="nav-item" href="{{url('category', $id)}}">hommes</a>
+              <a class="nav-item" href="{{url('category', $id)}}">{{App\Models\Category::frName($id)}}</a>
             </li>
-            @else
-            <li @if(Request::url() == url('category', $id)) class="active" @endif>
-              <a class="nav-item" href="{{url('category', $id)}}">femmes</a>
-            </li>
-            @endif
         @empty 
         <li>Aucune categorie pour l'instant</li>
         @endforelse
+        @endif
+        @if (Auth::check())
+          <li><a href="{{ route('products.index') }}">Dashboard</a></li> 
+          <li>
+            <a href="{{ route('logout') }}"
+                onclick="event.preventDefault();
+                          document.getElementById('logout-form').submit();">
+                Logout
+            </a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                {{ csrf_field() }}
+            </form>
+          </li>
         @endif
       </ul>
     </div>

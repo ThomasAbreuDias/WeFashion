@@ -30,7 +30,7 @@
     <div class="footer-copyright">
       <div class="container">
       © 2021 Copyright 
-      <a class="grey-text text-lighten-4 right" href="#!">Connexion</a>
+      @if(!Auth::check())<a class="grey-text text-lighten-4 right" href="{{ route('login') }}">Connexion</a>@endif
       </div>
     </div>
   </footer>

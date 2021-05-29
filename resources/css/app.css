@@ -13,6 +13,12 @@ main {
 i {
     padding-right: 2%;
 }
+.btn {
+    width: 75%;
+}
+.btn-add {
+    width: 50%;
+}
 /* After section */
 .euro::after {
     content: "€";

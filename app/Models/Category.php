@@ -12,4 +12,21 @@ class Category extends Model
     public function products() {
         return $this->hasMany(Product::class);
     }
+    /**
+     * @return string 
+     */
+    public function getFrName() {
+        return $this->$fr[$this->id];
+    }
+    /**
+     * Simple Traduction function
+     * @return string 
+     */
+    static function frName($id) {
+        $fr = [
+            1 => 'hommes',
+            2 => 'femmes',
+        ];
+        return $fr[$id];
+    }
 }

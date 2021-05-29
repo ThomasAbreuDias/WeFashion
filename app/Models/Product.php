@@ -32,6 +32,10 @@ class Product extends Model
     {
         return $this->sizes->pluck('pivot.size_id');
     }
+    public function getSizesArray() {
+        $sizes = collect(Size::find($this->getSizesIdsAttribute()))->toArray()[0];
+        return $sizes;
+    }
     public function picture(){
         return $this->hasOne(Picture::class);
     }

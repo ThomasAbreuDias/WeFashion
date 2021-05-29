@@ -15,6 +15,7 @@ class FrontController extends Controller
         // méthode pour injecter des données à une vue partielle 
         view()->composer('partials.menu', function($view){
             $categories = Category::pluck('name', 'id')->all(); // on récupère un tableau associatif ['id' => 1]
+            
             $view->with('categories', $categories ); // on passe les données à la vue
         });
     }
@@ -30,23 +31,17 @@ class FrontController extends Controller
     
     public function show(int $id) {
         $product = Product::find($id);
-        $sizes = Size::find($product->getSizesIdsAttribute())[0];
         return  view('front.show', [
             'product' => $product,
-            'sizes' => $sizes->toArray(),
+            'sizes' => $product->getSizesArray(),
         ]);
     }
     public function showProductByCategory(int $id) {
-        $fr_categories = [
-            'men' => 'hommes',
-            'weman' => 'femmes',
-        ];
         $category = Category::find($id);
         $products = $category->products()->published()->paginate($this->paginate);
         return  view('front.category', [
             'products' => $products,
             'category' => $category,
-            'fr_categories' => $fr_categories,
         ]);
     }
 }

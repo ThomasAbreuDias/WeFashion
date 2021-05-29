@@ -20,7 +20,7 @@
                 @endif
             </div>
             <div class="card-content">
-                <p>{{ Str::limit($product->description, 40) }}</p>
+                <p>{{ Str::limit($product->description, 20) }}</p>
             </div>
             <div class="card-action valign-wrapper cyan darken-2">
                     <a  class=" text-darken-1" href="{{url('product', $product->id)}}">{{$product->name}}</a>

@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('content')
 
-<h1>Pour les  : {{ ucfirst($category->name).'s' }}</h1>
+<h1>{{ ucfirst($category->name).'s' }}</h1>
 <div class="row">
     @if (empty($products))
         <h1>C'est vide</h1>

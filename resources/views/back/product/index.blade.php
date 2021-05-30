@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-<h1 class="center">Gerer les Produits</h1>
+<h1 class="center">Gérer les produits</h1>
     <header class="container left">
         <div class="col s12">
             <a class='btn btn-info btn-add' href="{{route('products.create')}}">

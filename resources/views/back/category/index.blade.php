@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-<h1>Gerer les catégories</h1>
+<h1 class="center">Gérer les catégories</h1>
     <header class="container left">
         <div class="col s12">
             @include('back.partials.flash')

@@ -12,7 +12,7 @@ class ProductController extends Controller
 {
 
 
-    protected $paginate = 8;
+    protected $paginate = 15;
     
     protected $validate_rules = [
         "name" => "required|string|max:100",
@@ -138,7 +138,6 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         $product->delete();
-        return redirect()->route('products.index');
-        // ->with('message', 'success delete');
+        return redirect()->route('products.index')->with('message', 'Produit supprimmé');
     }
 }

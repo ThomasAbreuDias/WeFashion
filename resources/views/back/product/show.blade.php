@@ -44,7 +44,7 @@
                     </tr>
                     <tr>
                         <td>Pour :</td>
-                        <td class="right-align">{{ucfirst(App\Models\Category::frName($product->category_id))}}</td>
+                        <td class="right-align">{{ucfirst($product->category->name)}}</td>
                     </tr>
                 </tbody>
             </table>

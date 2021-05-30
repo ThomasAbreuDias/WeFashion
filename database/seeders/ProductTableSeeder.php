@@ -15,8 +15,8 @@ class ProductTableSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\Category::create(['name' => 'men']);
-        \App\Models\Category::create(['name' => 'weman']);
+        \App\Models\Category::create(['name' => 'homme']);
+        \App\Models\Category::create(['name' => 'femme']);
 
         \App\Models\Product::factory(60)->create()->each(function($product) {
             $category = \App\Models\Category::find(rand(1, 2));

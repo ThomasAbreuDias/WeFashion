@@ -1838,18 +1838,12 @@ module.exports = {
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
   \*****************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _jquery_3_3_1__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./jquery-3.3.1 */ "./resources/js/jquery-3.3.1.js");
-/* harmony import */ var _jquery_3_3_1__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_jquery_3_3_1__WEBPACK_IMPORTED_MODULE_0__);
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
-__webpack_require__(/*! materialize-css */ "./node_modules/materialize-css/dist/js/materialize.js");
-
-
-window.$ = window.jQuery = (_jquery_3_3_1__WEBPACK_IMPORTED_MODULE_0___default());
+__webpack_require__(/*! materialize-css */ "./node_modules/materialize-css/dist/js/materialize.js"); // require('./jquery-3.3.1');
+// require('./confirm');
 
 /***/ }),
 
@@ -1891,8 +1885,8 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /***/ (() => {
 
 (function ($) {
-  $(".delete").on("submit", function () {
-    return confirm("Etes vous certain, cette action est irréversible ?");
+  $("#delete").on("submit", function () {
+    return confirm("zette sur d'vouloirs faire ça ? tous le monde vous regarde là...");
   });
 })(jQuery);
 
@@ -40906,30 +40900,6 @@ process.umask = function() { return 0; };
 /******/ 		};
 /******/ 	})();
 /******/ 	
-/******/ 	/* webpack/runtime/compat get default export */
-/******/ 	(() => {
-/******/ 		// getDefaultExport function for compatibility with non-harmony modules
-/******/ 		__webpack_require__.n = (module) => {
-/******/ 			var getter = module && module.__esModule ?
-/******/ 				() => (module['default']) :
-/******/ 				() => (module);
-/******/ 			__webpack_require__.d(getter, { a: getter });
-/******/ 			return getter;
-/******/ 		};
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/define property getters */
-/******/ 	(() => {
-/******/ 		// define getter functions for harmony exports
-/******/ 		__webpack_require__.d = (exports, definition) => {
-/******/ 			for(var key in definition) {
-/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
-/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
-/******/ 				}
-/******/ 			}
-/******/ 		};
-/******/ 	})();
-/******/ 	
 /******/ 	/* webpack/runtime/global */
 /******/ 	(() => {
 /******/ 		__webpack_require__.g = (function() {
@@ -40975,7 +40945,7 @@ process.umask = function() { return 0; };
 /******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
 /******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
 /******/ 		var installedChunks = {
-/******/ 			"/js/app": 0,
+/******/ 			"/js/jquery-3.3.1": 0,
 /******/ 			"css/app": 0
 /******/ 		};
 /******/ 		

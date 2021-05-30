@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="row">
-    <h1 class="center">Modifier le livre : {{$product->id}}</h1>
+    <h1 class="center">Modifier le produit : {{$product->id}}</h1>
 </div>
     <form class="container" action="{{route('products.update', $product->id)}}" method="POST" enctype="multipart/form-data">
         {{ csrf_field() }}
@@ -41,7 +41,7 @@
                 <select class="browser-default" id="category_id" name="category_id">
                     <option value="0" {{is_null($categories)? 'selected' : ''}}>Pas de categories</option>
                     @forelse ($categories as $id => $category)
-                        <option {{ ( !is_null($product->category) and $product->category->id == $id ) ? 'selected' : '' }} id="{{$id}}" value="{{$id}}">{{ucfirst( App\Models\Category::frName($id) )}}</option>
+                        <option {{ ( !is_null($product->category) and $product->category->id == $id ) ? 'selected' : '' }} id="{{$id}}" value="{{$id}}">{{ucfirst($category)}}</option>
                     @empty
                         Vous devez ajouter des categories pour continuer
                     @endforelse

@@ -8,11 +8,7 @@
                 <i class="material-icons left">add</i>
                 Ajouter un nouveau produit !
             </a>
-            @if(session()->get('message'))
-                <div class="alert alert-success">
-                {{ session()->get('message') }}
-                </div>
-            @endif
+            @include('back.partials.flash')
         </div>
     </header>
     @if (empty($products))
@@ -48,7 +44,7 @@
                     </td>
                     <td><span>{{ $product->reference ?? "aucune ref"}}</span></td>
                     <td><span class="euro">{{ $product->price ?? "aucun genre"}}</span></td>
-                    <td>{{ ucfirst(App\Models\Category::frName($product->category->id)) ?? "aucun genre"}}</td>
+                    <td>{{ucfirst($product->category->name)}}</td>
                     <td>
                         @if($product->status == 'published')
                             <a class="waves-effect waves-light btn green" title="Publié">

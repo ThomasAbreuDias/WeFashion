@@ -41,7 +41,7 @@
                 <select class="browser-default" id="category_id" name="category_id">
                     <option value="" {{is_null($categories)? 'selected' : ''}}>Pas de categories</option>
                     @forelse ($categories as $id => $category)
-                        <option {{ !is_null(old('category_id')) ? 'selected' : '' }} id="{{$id}}" value="{{$id}}">{{ucfirst( App\Models\Category::frName($id) )}}</option>
+                        <option {{ !is_null(old('category_id')) ? 'selected' : '' }} id="{{$id}}" value="{{$id}}">{{ucfirst($category)}}</option>
                     @empty
                         Vous devez ajouter des categories pour continuer
                     @endforelse

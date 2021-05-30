@@ -31,4 +31,4 @@ Route::get('img/{path}', [ImageController::class, 'show'])->where('path', '.*');
 /*Auth*/
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/admin', [ProductController::class, 'index'])->name('home');

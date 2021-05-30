@@ -14340,7 +14340,21 @@ i {
 .btn-add {
     width: 50%;
 }
+input[type=text] { 
+    border-bottom: 0.5px solid #666 !important ;
+}
+textarea {
+    border-right: 1px solid #666 !important ;
+    border-left: 1px solid #666 !important ;
+    border-bottom: 0.3px solid #666 !important ;
 
+}
+.price {
+    padding: 0% 5% 0% 5%;
+}
+.preview {
+    padding: 15%;
+}
 /* After section */
 .euro::after {
     content: "€";

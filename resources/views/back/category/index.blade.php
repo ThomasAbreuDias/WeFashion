@@ -4,10 +4,6 @@
 <h1>Gerer les catégories</h1>
     <header class="container left">
         <div class="col s12">
-            <a class='btn btn-info btn-add' href="{{route('categories.create')}}">
-                <i class="material-icons left">add</i>
-                Ajouter une nouvelle categorie !
-            </a>
             @include('back.partials.flash')
         </div>
     </header>
@@ -20,7 +16,6 @@
             <thead>
                 <tr>
                     <th scope="col">Nom</th>
-                    <th scope="col">Traduction</th>
                     <th scope="col">Suppression</th>
                 </tr>
             </thead>
@@ -44,6 +39,14 @@
                     <th>Désolé pour l'instant aucun produit n'est publié sur le site</th>
                 </tr>
                 @endforelse
+                <tr>
+                    <td>
+                        <a class='btn btn-info btn-add' href="{{route('categories.create')}}">
+                            <i class="material-icons left">add</i>
+                            Ajouter categorie !
+                        </a>
+                    </td>
+                </tr>
             </tbody>
         </table>
     </Section>

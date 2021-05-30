@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-<h1>Bienvenue sur le Back Office</h1>
+<h1 class="center">Gerer les Produits</h1>
     <header class="container left">
         <div class="col s12">
             <a class='btn btn-info btn-add' href="{{route('products.create')}}">
@@ -32,9 +32,13 @@
             <tbody>
                 @forelse($products as $product)
                 <tr @if($product->discounted) class="red lighten-5" title="Article soldé"@endif>
+
+                    {{-- Name --}}
                     <th scope="row">
                         <a href="{{route('products.edit',$product->id) }}">{{Str::upper($product->name)}}</a>
                     </th>
+
+                    {{-- Sizes --}}
                     <td>
                         @forelse ($product->sizes as $size)
                             {{$size}}
@@ -42,9 +46,17 @@
                             Non disponible
                         @endforelse
                     </td>
+
+                    {{-- Ref. --}}
                     <td><span>{{ $product->reference ?? "aucune ref"}}</span></td>
+
+                    {{-- Price --}}
                     <td><span class="euro">{{ $product->price ?? "aucun genre"}}</span></td>
+
+                    {{-- Category --}}
                     <td>{{ucfirst($product->category->name)}}</td>
+
+                    {{-- Status --}}
                     <td>
                         @if($product->status == 'published')
                             <a class="waves-effect waves-light btn green" title="Publié">
@@ -56,12 +68,15 @@
                             </a>
                         @endif
                     </td>
+
+                    {{-- Show --}}
                     <td >
-                        <a class="black-text" href="{{route('products.show',$product->id)}}">
-                            <i class="material-icons left">preview</i>
-                            <label class="black-text">Aperçu</label>
+                        <a title="Aperçu" class="black-text preview" href="{{route('products.show',$product->id)}}">
+                            <i class="material-icons center">preview</i>
                         </a>
                     </td>
+
+                    {{-- Delete --}}
                     <td>            
                         <form class="delete" method="POST" action="{{route('products.destroy', $product->id)}}">
                             {{ method_field('DELETE') }}

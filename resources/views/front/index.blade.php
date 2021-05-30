@@ -12,20 +12,7 @@
     @foreach($products as $product)
     @if ($product->status !== 'unpublished')
     <div class="col s12 m8 l4">
-        <div class="card">
-            <div class="card-image">
-                <img src="{{ image($product->picture->link, 500, 600, 'crop-75-25') }}">
-            </div>
-            <div class="card-action valign-wrapper ">
-                    <a  class="we-fashion-green" href="{{url('product', $product->id)}}">{{$product->name}}</a>
-                    <div class="right-align">
-                        <span class="right-align euro">{{$product->price}}</span>
-                        @if ($product->discounted && !Request::is('sales'))
-                        <span class="badge red">en solde</span>   
-                        @endif
-                    </div>
-            </div>
-        </div>
+        @include('partials.card')
     </div>
     @endif   
     @endforeach

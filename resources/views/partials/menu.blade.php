@@ -1,22 +1,29 @@
-<nav>
+<nav class="green">
     <div class="nav-wrapper container">
-      <a href="{{url('/')}}" class="waves-effect waves-teal btn-flat we-fashion-green">{{config('app.name')}}</a>
+      <a href="{{url('/')}}" class="waves-effect waves-teal btn-flat we-fashion-green green lighten-5"
+      @if(isBack()) title="Retour côté public" @endif>
+        {{config('app.name')}} 
+      </a>
       <ul id="nav-mobile" class="right">
-        @if (isset($categories))
-        <li @if(Request::is('admin')) class="active" @endif>
-            <a class="nav-item" href="{{url('sales')}}">soldes</a>
-        </li>
-        @forelse($categories as $id => $name)
-            <li @if(Request::url() == url('category', $id)) class="active" @endif>
-              <a class="nav-item" href="{{url('category', $id)}}">{{ucfirst($name)}}</a>
-            </li>
-        @empty 
-        <li>Aucune categorie pour l'instant</li>
-        @endforelse
+        {{-- Solde --}}
+        @if (isset($categories) && !isBack())
+          <li @if(Request::is('sales')) class="active" @endif>
+              <a class="nav-item" href="{{url('sales')}}">soldes</a>
+          </li>
+
+          {{-- Categories --}}
+          @forelse($categories as $id => $name)
+              <li @if(Request::url() == url('category', $id)) class="active" @endif>
+                <a class="nav-item" href="{{url('category', $id)}}">{{$name}}</a>
+              </li>
+          @empty 
+          <li>Aucune categorie pour l'instant</li>
+          @endforelse
         @endif
         @if (Auth::check())
           <li class="left"><a href="{{ route('products.index') }}">Produits</a></li> 
           <li class="left"><a href="{{ route('categories.index') }}">Categories</a></li> 
+          {{-- Logout --}}
           <li>
             <a href="{{ route('logout') }}"
                 onclick="event.preventDefault();

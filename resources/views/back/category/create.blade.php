@@ -8,7 +8,7 @@
         {{ csrf_field() }}
         <div class="row">
             <fieldset class="input-field col s12">
-                <legend class="control-label">Saisissez le de la categorie</legend>
+                <legend class="control-label">Saisissez le nom de la categorie</legend>
                 <input type="text" name="name" value="{{old('name')}}">
                 @if($errors->has('name')) <span class="error">{{$errors->first('name')}}</span>@endif
             </fieldset>
